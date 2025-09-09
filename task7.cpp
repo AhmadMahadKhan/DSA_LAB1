@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
+// this method prints the matrix
 void print_matrix(const vector<vector<int>> &M)
 {
     for (const vector<int> &row : M)
@@ -11,7 +11,7 @@ void print_matrix(const vector<vector<int>> &M)
         cout << endl;
     }
 }
-
+// this naive methos will return a 2d vector 
 vector<vector<int>> multiply_naive(const vector<vector<int>> &A, const vector<vector<int>> &B)
 {
     int n = A.size();
@@ -28,6 +28,7 @@ vector<vector<int>> multiply_naive(const vector<vector<int>> &A, const vector<ve
     }
     return C;
 }
+// added method that will add the vectos
 vector<vector<int>> add(const vector<vector<int>> &A, const vector<vector<int>> &B)
 {
     int n = A.size();
@@ -37,6 +38,7 @@ vector<vector<int>> add(const vector<vector<int>> &A, const vector<vector<int>> 
             C[i][j] = A[i][j] + B[i][j];
     return C;
 }
+// subract method that will subract the 2d vectos
 vector<vector<int>> subtract(const vector<vector<int>> &A, const vector<vector<int>> &B)
 {
     int n = A.size();
@@ -46,7 +48,8 @@ vector<vector<int>> subtract(const vector<vector<int>> &A, const vector<vector<i
             C[i][j] = A[i][j] - B[i][j];
     return C;
 }
-
+// implemeted the straseen algorithm whcih simplices the direct addition an dmultiplication 
+// calculated m1 to m7 with help of geeksfor geek
 vector<vector<int>> strassen(const vector<vector<int>> &A, const vector<vector<int>> &B)
 {
     int n = A.size();
@@ -79,13 +82,13 @@ vector<vector<int>> strassen(const vector<vector<int>> &A, const vector<vector<i
     }
 
     // Strassen’s 7 multiplications
-    auto M1 = strassen(add(A11, A22), add(B11, B22));
-    auto M2 = strassen(add(A21, A22), B11);
-    auto M3 = strassen(A11, subtract(B12, B22));
-    auto M4 = strassen(A22, subtract(B21, B11));
-    auto M5 = strassen(add(A11, A12), B22);
-    auto M6 = strassen(subtract(A21, A11), add(B11, B12));
-    auto M7 = strassen(subtract(A12, A22), add(B21, B22));
+    vector<vector<int>> M1 = strassen(add(A11, A22), add(B11, B22));
+    vector<vector<int>> M2 = strassen(add(A21, A22), B11);
+    vector<vector<int>> M3 = strassen(A11, subtract(B12, B22));
+    vector<vector<int>> M4 = strassen(A22, subtract(B21, B11));
+    vector<vector<int>> M5 = strassen(add(A11, A12), B22);
+    vector<vector<int>> M6 = strassen(subtract(A21, A11), add(B11, B12));
+    vector<vector<int>> M7 = strassen(subtract(A12, A22), add(B21, B22));
 
     // Combine results
     vector<vector<int>> C(n, vector<int>(n));
@@ -102,7 +105,7 @@ vector<vector<int>> strassen(const vector<vector<int>> &A, const vector<vector<i
 
     return C;
 }
-
+// test 2 with 2x2 matix
 void test_2_matrix()
 {
     cout << "test case1... 2x2 matrices" << endl;
@@ -119,6 +122,7 @@ void test_2_matrix()
     cout << "test case passed..." << endl
          << endl;
 }
+// testing with random values with a 4x4 matirc
 void test_4_matrix()
 {
     cout << "test case2... 4x4 matrices" << endl;
@@ -143,7 +147,7 @@ void test_4_matrix()
     cout << "test case passed..." << endl
          << endl;
 }
-
+// testing with random values
 void random_values()
 {
     cout << "test case3... Fixed 4x4 values" << endl;
